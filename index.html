@@ -6,133 +6,43 @@
 <meta name="copyright" content="智能社 - zhinengshe.com">
 <title>智能社 - www.zhinengshe.com</title>
 <style>
-	*{margin:0;padding:0; list-style:none;}
-	#ul1{width:960px;margin:0 auto;}
-	#ul1 li{width:200px;height:200px;  float:left;margin:10px;background:#ccc; font-size:80px; overflow:hidden; position:relative;}
-	#ul1 li span{width:100%;height:100%; background:red; opacity:.3; position:absolute;left:-200px; top:0;}
+	#box{width: 500px;height: 30px;border:1px solid #000; border-radius: 15px;margin: 20px auto;position: relative;overflow: hidden;}
+	#bar{width: 1000px;height: 30px;background:-webkit-repeating-linear-gradient(-45deg,red 10px,red 20px,green 20px,green 30px);position: absolute;top:0;left: 0;}
 </style>
-<script src="move.js"></script>
 <script>
-function through(obj){
-	function a2d(n){
-		return 	n*180/Math.PI;
-	}
-	//判断鼠标从哪个边移入
-	function hoverDir(obj,ev){
-		var x = obj.offsetLeft+obj.offsetWidth/2 - ev.clientX;
-		var y = obj.offsetTop+obj.offsetHeight/2 - ev.clientY;
-		return Math.round((a2d(Math.atan2(y,x))+180)/90)%4;
-	}
-	obj.onmouseover = function(ev){
-		var oEvent = ev||event;
-		var oFrom = oEvent.fromElement||oEvent.relatedTarget;
-		if(obj.contains(oFrom)){
-			return;
-		}
-		var dir = hoverDir(obj,oEvent);
-		var oS = obj.children[0];
-		//左边 2 右侧0 上边3  下边1
-		switch(dir){
-			case 0:
-				oS.style.left = '200px';
-				oS.style.top = 0;
-			break;
-			case 1:
-				oS.style.top = '200px';
-				oS.style.left = 0;
-			break;
-			case 2:
-				oS.style.left = '-200px';
-				oS.style.top = 0;
-			break;
-			case 3:
-				oS.style.top = '-200px';
-				oS.style.left = 0;
-			break;
-		}
-		move(oS,{left:0,top:0});
+	window.onload=function(){
+		var oBar=document.querySelector('#bar');
+		var oColor1=document.querySelector('#color1');
+		var oColor2=document.querySelector('#color2');
+		var oCol1=document.querySelector('#col1');
+		var oCol2=document.querySelector('#col2');
+		oCol1.innerHTML=oColor1.value;
+		oCol2.innerHTML=oColor2.value;
+		oColor1.onchange=function(){
+			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+		};
+		oColor2.onchange=function(){
+			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+		};
+		var l=0;
+		setInterval(function(){
+			l-=10;
+			oBar.style.left=l%500+'px';
+		},100)
 	};
-	
-	obj.onmouseout = function(ev){
-		var oEvent = ev||event;
-		var oTo = oEvent.toElement||oEvent.relatedTarget;
-		if(obj.contains(oTo)){
-			return;
-		}
-		var dir = hoverDir(obj,oEvent);
-		var oS = obj.children[0];
-		//左边 2 右侧0 上边3  下边1
-		switch(dir){
-			case 0:
-				move(oS,{left:200,top:0});
-			break;
-			case 1:
-				move(oS,{left:0,top:200});
-			break;
-			case 2:
-				move(oS,{left:-200,top:0});
-			break;
-			case 3:
-				move(oS,{left:0,top:-200});
-			break;
-		}
-	};
-}
-
-window.onload = function(){
-	var oUl = document.getElementById('ul1');	
-	var aLi = oUl.children;
-	for(var i = 0;i<aLi.length;i++){
-		through(aLi[i]);
-	}
-};
 
 </script>
 </head>
 <body>
-	<ul id="ul1">
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    	<li>
-        	<span></span>
-        </li>
-    </ul>
+<div>颜色:
+	<input id="color1" type="color" value="#FF0000" />
+	<input id="color2" type="color" value="#00FF00" />
+	<br/>
+	<span id="col1"></span>
+	<span id="col2"></span>
+	<div id="box">
+		<div id="bar"></div>
+	</div>
+</div>
 </body>
 </html>
