@@ -20,9 +20,15 @@
 		oCol2.innerHTML=oColor2.value;
 		oColor1.onchange=function(){
 			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+			oCol1.innerHTML=oColor1.value;
+			oCol2.innerHTML=oColor2.value;
+
 		};
 		oColor2.onchange=function(){
 			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+			oCol1.innerHTML=oColor1.value;
+			oCol2.innerHTML=oColor2.value;
+
 		};
 		var l=0;
 		setInterval(function(){
