@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com">
+<meta name="copyright" content="智能社 - zhinengshe.com">
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+	#box{width: 500px;height: 30px;border:1px solid #000; border-radius: 15px;margin: 20px auto;position: relative;overflow: hidden;}
+	#bar{width: 1000px;height: 30px;background:-webkit-repeating-linear-gradient(-45deg,red 10px,red 20px,green 20px,green 30px);position: absolute;top:0;left: 0;}
+</style>
+<script>
+	window.onload=function(){
+		var oBar=document.querySelector('#bar');
+		var oColor1=document.querySelector('#color1');
+		var oColor2=document.querySelector('#color2');
+		var oCol1=document.querySelector('#col1');
+		var oCol2=document.querySelector('#col2');
+		oCol1.innerHTML=oColor1.value;
+		oCol2.innerHTML=oColor2.value;
+		oColor1.onchange=function(){
+			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+			oCol1.innerHTML=oColor1.value;
+			oCol2.innerHTML=oColor2.value;
+
+		};
+		oColor2.onchange=function(){
+			oBar.style.background='-webkit-repeating-linear-gradient(-45deg,'+oColor1.value+' 10px,'+oColor1.value+' 20px,'+oColor2.value+' 20px,'+oColor2.value+' 30px)';
+			oCol1.innerHTML=oColor1.value;
+			oCol2.innerHTML=oColor2.value;
+
+		};
+		var l=0;
+		setInterval(function(){
+			l-=10;
+			oBar.style.left=l%500+'px';
+		},100)
+	};
+
+</script>
+</head>
+<body>
+<div>颜色:
+	<input id="color1" type="color" value="#FF0000" />
+	<input id="color2" type="color" value="#00FF00" />
+	<br/>
+	<span id="col1"></span>
+	<span id="col2"></span>
+	<div id="box">
+		<div id="bar"></div>
+	</div>
+</div>
+</body>
+</html>
